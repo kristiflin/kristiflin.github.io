@@ -1,369 +1,92 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link href="./css/montserrat.css" rel="stylesheet">
-    </head>
-    <style>
 
-        h2{
-            font-family: 'Montserrat', sans-serif;
-            display: inline-block;
-            transform: translateX(-50%);
-            left:50%;
-            position: absolute;
-            color:white;
-        }
+<head>
+  <link href="./css/montserrat.css" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <title> Kristi Lin </title>
+  <link rel="icon" href="images/favicon.svg" />
+</head>
+<style>
 
-        text{
-          color:white;
-          font-family: 'Montserrat', sans-serif
-        }
+</style>
 
-        .axis line {
-            stroke: white;
-            /* opacity: 0.7; */
-        }
+<body>
 
-        .axis path {
-            stroke-width: 0;
-        }
+  <div id="header">
+    <a href="./index.html"> <img src="./images/logo.svg" alt="logo"> </a>
+    <div id="nav-links">
+      <a class="nav-link selected-nav" href="./index.html">Work</a>
+      <a class="nav-link" href="./about.html">About</a>
+      <a class="nav-link" href="https://www.dropbox.com/s/i7q0n5xj8aniii3/Kristi_Lin_Resume.pdf?dl=0"
+        target="_blank">Resume</a>
+    </div>
+  </div>
 
-        svg{
-          position: absolute;
-          top: 130px;
-          transform: translateX(-50%);
-          left:50%;
-        }
-
-        @media (max-width: 1500px){
-          svg{
-            transform: translateX(0);
-            left:0px;
-          }
-        }
-        .linegraph{
-          stroke-width: 3px;
-          opacity: 0.8;
-          fill:rgba(0,0,0,0);
-          /* stroke:aquamarine; */
-        }
-
-        body{
-          background: black
-        }
-
-        .textcolor{
-          color:white
-        }
-
-
-    </style>
-    <body>
-      <h2>
-
-      </h2>
-
-
+  <div id="intro">
     <h2>
-      Top Artists for Every 5 Years (1958-2019)
-      Based on Number of Weeks on the Billboard Top 100
+      Hi, I'm Kristi.
     </h2>
+    <p>
+      Welcome to my portfolio! Check out some of the UX and digital design projects I've done below. Project write-ups
+      coming soon.
+    </p>
+  </div>
 
-      <svg id="graph" height="1500" width="1000">
-      </svg>
+  <div class="project-card">
+    <div class="thumbnail-img">
+      <img src="./images/tempo-thumbnail.png" alt="desktop-design" width="425px">
+    </div>
+    <div class="project-text">
+      <h3>Tempo: Loan Servicing Platform </h3>
+      <p>
+        UX Design for a new, internal platform used for processing financial loans.
+      </p>
+      <!-- <a>Explore -></a> -->
 
-      <defs>
-    <script src="https://d3js.org/d3.v5.min.js"></script>
+    </div>
+  </div>
 
-    <script>
+  <div class="project-card">
+    <div class="project-text">
+      <h3>Assurant: Expanding the Digital Design System </h3>
+      <p>
+        UX Design and Research for UX design best practices pertaining to insurance webpages and user flows.
+      </p>
+      <!-- <a>Explore -></a> -->
+    </div>
+    <div class="thumbnail-img">
+      <img src="./images/assurant-thumbnail.png" alt="desktop-design" width="425px">
+    </div>
+  </div>
 
-      const height = 1500;
-      const width = 1500;
+  <div class="project-card">
+    <div class="thumbnail-img">
+      <img src="./images/advantech-thumbnail.png" alt="desktop-design" width="425px">
+    </div>
+    <div class="project-text">
+      <h3>Advantech: System Management Interfaces</h3>
+      <p>
+        UX Design for SaaS platforms to improve and build mid-fi user flows, design consistencies, and new features.
+      </p>
+      <!-- <a>Explore -></a> -->
 
-      let svg = d3.select("svg#graph");
-      resizeSVG();
+    </div>
+  </div>
 
-      window.onresize = ()=>{
-          resizeSVG();
-      }
+  <!-- <div class="project-card">
+    <div class="project-text">
+      <h3>Fun Stuff</h3>
+      <p>
+        A collection of dabbles in different mediums.
+      </p>
+      <a href="./stuff.html">Explore -></a>
+    </div>
+    <div class="thumbnail-img">
+      <img src="./images/assurant-thumbnail.png" alt="desktop-design" width="425px">
+    </div>
+  </div> -->
 
-      function resizeSVG(){
-        svg.attr("width",  width);
-      }
+</body>
 
-      let margin = {top:120, right:20, bottom:20, left:30};
-
-      let WGraph = width - margin.right - margin.left;
-      let HGraph = height - margin.top - margin.bottom;
-
-      let upper = svg.append('g')
-      .attr('transform','translate('+margin.left*1.5+','+margin.top+')')
-      let lower = svg.append('g')
-      .attr('transform','translate('+margin.left*1.5+','+(HGraph*1/3+30)+')');
-      //load the data
-      const artistsPics=["connie-francis.png","beatles.jpg","james-brown.jpg","Gladys-knight.png","donna-summer.jpg","madonna.jpg","Michael-bolton.jpg","toni-braxton.jpg","Faith-Hill.jpg", "rascal-flatts.jpg","taylor-swift.jpg", "drake.jpg","drake.jpg"];
-      const artistNames=["Connie Francis", "The Beatles", "James Brown", "Gladys Knight", "Donna Summer", "Madonna", "Michael Bolton", "Toni Braxton", "Faith Hill", "Rascal Flatts", "Taylor Swift", "Drake", "Drake"];
-
-      d3.csv('../static/Hot Stuff.csv')
-      .then(data=>{
-        var dataByYear = [];
-        var dataByPerformers = {};
-        var dataBy5Years = [];
-        let latestYearInData =1;
-        let minYear = 2019;
-        let maxRank = 1;
-
-        //find min year & organize data by performer
-        data.forEach(elem=>{
-            let year = parseInt(elem.WeekID.split('/')[2]);
-            minYear = Math.min(minYear, year);
-            latestYearInData = Math.max(latestYearInData,year);
-            dataByYear[year] = dataByYear[year]||[];
-            dataByYear[year].push(elem);
-
-            dataByPerformers[elem.Performer] = dataByPerformers[elem.Performer]||[];
-            dataByPerformers[elem.Performer][year] = dataByPerformers[elem.Performer][year]||[];
-            dataByPerformers[elem.Performer][year].push(elem);
-            maxRank = Math.max(maxRank,elem["Week Position"]);
-        });
-        let latestYear = latestYearInData+((latestYearInData-minYear+1)%5?1:0);
-        
-
-        //data by 5 year
-        let minPeriodId=Infinity, maxPeriodId=-1;
-        for (let year in dataByYear){
-            if(dataByYear[year] === undefined)continue;
-            let period = Math.floor((parseInt(year)-minYear)/5);
-            minPeriodId = Math.min(period,minPeriodId);
-            maxPeriodId = Math.max(period,maxPeriodId);
-            dataBy5Years[period] = (dataBy5Years[period]||[]).concat(dataByYear[year]);
-        }
-
-        const colors = ['#5fad4c','#ead38c','#b302e0','#0aa5ff', '#ffff08','#ff08d9','#c45a21','#336684', '#32ff00', '#ff7f00 ', '#ff0000', '#ffa8ca', '#ffa8ca'];
-        // const colors = ['#1D9A6C','#41A31A','#83A718','#AB8B16', '#AF4715','#B31329','#B71275','#B110BB', '#6312BF', '#1414C3', '#165FC6', '#18B8CA', '#1ACE86'];
-
-        // const colors=['#C85AB4','#0D24DE','#24D3ED','#E5B0D9'];
-        var favArtistsBy5Years=[];
-        //data organization for left graph
-        dataBy5Years.forEach ( (arr,i) => {
-            let artist;
-
-            let artists = {};
-            arr.forEach((d)=>{
-              artists[d.Performer] = artists[d.Performer]||{weeksNum:0, songs:{}};
-              artists[d.Performer].weeksNum++;
-              artists[d.Performer].songs[d.Song] = artists[d.Performer].songs[d.Song]||0;
-              artists[d.Performer].songs[d.Song]++;
-
-            })
-
-            let maxWeekNum = 0;
-            let favArtist;
-            for(let name in artists)
-            {
-              if(artists[name].weeksNum>maxWeekNum){
-                maxWeekNum = artists[name].weeksNum;
-                favArtist = artists[name];
-                favArtist.name = name;
-              }
-            }
-            favArtistsBy5Years.push(favArtist);
-
-          })
-
-        function drawLower(){
-          //create scales
-          const YScale = d3.scaleLinear()
-            .domain ([500, 0])
-            .range([HGraph*2/3,0]);
-
-          const XScale = d3.scaleLinear()
-            .domain ([minPeriodId, maxPeriodId+1])
-            .range ([0,WGraph-40]);
-
-          //draw axes for graph 1
-          var lower_x_axis = d3.axisTop(XScale)
-          .ticks(15)
-          .tickFormat(id=>{
-            let startyear = minYear+5*id;
-            return startyear>latestYear?latestYear:startyear
-          }).tickSize(0,0);
-
-          var lower_y_axis = d3.axisLeft(YScale)
-          .ticks(maxPeriodId-minPeriodId+1)
-          .tickFormat(week=>{
-            if(week==0)return '# Weeks';
-            else return week
-          })
-          .tickSize(-15,0);
-
-          lower.append("g")
-          .attr("transform","translate("+ (0) +","+ margin.top +")")
-          .attr('class','axis')
-          .style("font-size", 10)
-          .call(lower_y_axis);
-
-          lower.append("g")
-          .attr('class','axis')
-          .style('font-size',14)
-          .attr("transform","translate("+ (margin.left) +","+ (margin.top-10) +")")
-          .call(lower_x_axis);
-
-          favArtistsBy5Years.forEach((d,periodID) => {
-            let cx = margin.left+XScale(periodID)+ (WGraph/24);
-            
-            let img = svg.append("image")
-              .attr("xlink:href","/static/photos/"+ artistsPics[periodID])
-              .attr('x',0)
-              .attr('y',40)
-              .attr('height',50)
-              .attr('width',50)
-              .attr('transform','translate('+(cx+10)+','+(margin.bottom-60)+')')
-              svg.append("text")
-              .text(artistNames[periodID])
-              .attr('y',50)
-              .attr('transform','translate('+(cx+margin.left+10)+','+margin.bottom+')')
-              .attr ('alignment-baseline', 'central')
-              .attr('style', 'text-anchor:middle;')
-              .attr ("font-size", 14)
-              .attr ("fill", "white")
-              .attr ("font-family", "'Montserrat', sans-serif");
-              svg.append('line')
-              .attr('x1',cx+margin.left+10-artistNames[periodID].length*3)
-              .attr('y1',margin.bottom+65)
-              .attr('x2',cx+margin.left+10+artistNames[periodID].length*3)
-              .attr('y2',margin.bottom+65)
-              .attr('stroke',colors[periodID])
-              .attr('stroke-width','2px')
-
-            let totalWeekNum=0;
-
-            //tops
-            let sortedSongs=[];
-            for(let songName in d.songs){
-              sortedSongs.push({name:songName,count:d.songs[songName]});
-            }
-            sortedSongs.sort((a,b)=>b.count-a.count);
-            let isTop3={};
-            isTop3[sortedSongs[0].name]=1
-            // isTop3[sortedSongs[1].name]=2
-            // isTop3[sortedSongs[2].name]=3
-
-            const opacityScale = d3.scaleLog()
-              .domain ([1, 50])
-              .range([0.2,1]);
-
-            for(let songName in d.songs ){
-              let songWeekNum = d.songs[songName]
-              //const artistScale = d3.scaleOrdinal(d3.schemeCategory20);
-              // if(songWeekNum<10)continue;
-              // console.log(songWeekNum)
-              let cy=margin.top+YScale(totalWeekNum+songWeekNum/2)
-              //let artistcolor = artistScale(name);
-              //console.log(artistScale)
-              let dot2 = lower.append("circle")
-              .attr ("cx", cx)
-              .attr("cy", cy)
-              .attr("r", YScale(songWeekNum/2))
-              .attr('opacity',opacityScale(songWeekNum))
-              .style("fill",colors[periodID%colors.length])
-              if(songWeekNum >= 26||isTop3[songName]) {
-                let wordlength = songName.length;
-                const lineLength = 10;
-                const lineNum = Math.ceil(wordlength/lineLength);
-                let text = lower.append('text')
-                .text(songName)
-                .attr ('x', cx)
-                .attr ('y', cy)
-                .attr ('alignment-baseline', 'central')
-                .attr('style', 'text-anchor:middle')
-                .attr ("font-size", 12)
-                .attr ("fill", "white")
-                .attr ("font-family", "'Montserrat', sans-serif");
-              }
-              totalWeekNum+=songWeekNum;
-
-            }
-
-          })
-        }
-
-        function drawUpper(){
-          //create scales
-          const YScale = d3.scaleLinear()
-            .domain ([0,maxRank])
-            .range([0,HGraph*1/3]);
-
-          const XScale = d3.scaleLinear()
-            .domain ([minYear, (latestYear===latestYearInData?latestYear:latestYearInData+5-(latestYear-latestYearInData))])
-            .range ([0,WGraph-40]);
-
-          //draw axes for graph 1
-          var upper_x_axis = d3.axisTop(XScale)
-          .ticks(latestYear-minYear+1)
-          .tickFormat(id=>{
-            // console.log(id)
-            return "";
-          }).tickSize(HGraph*1/3,0);
-
-          var upper_y_axis = d3.axisLeft(YScale)
-          .ticks(Math.ceil((maxRank-1)/10))
-          .tickFormat(rank=>{
-            if(rank===0)return "No. "+(rank+1)
-            return rank+1
-          })
-          .tickSize(-15,0);
-
-          upper.append("g")
-          .attr('class','axis')
-          .style("font-size", 10)
-          .call(upper_y_axis);
-
-          upper.append("g")
-          .attr('class','axis')
-          .attr("transform","translate("+ (margin.left) +","+ (HGraph*1/3) +")")
-          .attr("opacity","0.3")
-          .call(upper_x_axis);
-
-          for(let performer in dataByPerformers){
-            let performerInFavs = favArtistsBy5Years.find(elem=>elem.name === performer);
-            if(performerInFavs===undefined)continue;
-            let performerIdInFavs = favArtistsBy5Years.indexOf(performerInFavs);
-            
-            let pathData = [];
-
-            for (let year in dataByPerformers[performer]){
-              let songs = dataByPerformers[performer][year]
-              if(songs===undefined)continue;
-              //find best ranking this year
-              let bestRank = 101;
-              for(let name in songs){
-                let song = songs[name]
-                bestRank = Math.min(parseInt(song["Week Position"]),bestRank);
-              }
-              
-              let x = parseInt(year),y=bestRank-1;
-              pathData.push({x,y});
-              upper.append('circle').attr('cx',XScale(x)).attr('cy',YScale(y))
-              .attr('r',2).attr('fill',colors[performerIdInFavs])
-              .attr('transform','translate('+margin.left+',0)')
-
-            }
-            let path = d3.line().x(d=>parseInt(XScale(d.x))).y(d=>parseInt(YScale(d.y)));
-            upper.append('path')
-            .attr("class","linegraph")
-            .attr('stroke',colors[performerIdInFavs])
-            .datum(pathData).attr('d',path)
-            .attr('transform','translate('+margin.left+',0)');
-          }
-          
-        }
-
-        drawUpper();
-        drawLower();
-
-      })
-
-        </script>
-    </body>
 </html>
