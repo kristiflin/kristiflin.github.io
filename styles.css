@@ -28,7 +28,8 @@ a:hover {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #F1E9D9;
-    padding: 24px;
+    padding: 16px;
+    margin: 0px 16px;
 }
 
 #nav-links {
@@ -47,6 +48,7 @@ a:hover {
     text-align: center;
     margin: 0 auto;
     padding: 36px 24px;
+    max-width: 725px;
 }
 
 
@@ -71,9 +73,10 @@ a:hover {
     display: flex;
     flex-direction: row;
     gap: 36px;
-    margin: 40px;
+    margin: 24px;
     padding: 24px;
     align-items: center;
+    max-width: 825x;
 }
 
 .project-card h3 {
