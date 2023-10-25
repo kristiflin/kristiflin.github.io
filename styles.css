@@ -5,6 +5,7 @@ body {
     font-family: 'Montserrat';
     max-width: 900px;
     margin: 0 auto;
+
 }
 
 h1, h2, h3, p {
@@ -17,6 +18,7 @@ a {
     color: #EB6447;
     /* font-weight: bold; */
     text-decoration: none;
+    transition: .3s;
 }
 
 a:hover {
@@ -49,6 +51,9 @@ a:hover {
     margin: 0 auto;
     padding: 36px 24px;
     max-width: 725px;
+
+    animation: inFromBottom 0.4s ease-out 0.25s;
+    animation-fill-mode: backwards;
 }
 
 
@@ -63,10 +68,22 @@ a:hover {
 #about-pic {
     padding: 16px 0px;
     max-width: 100%;
+    animation: inFromBottom 0.6s ease-out 0.25s;
+    animation-fill-mode: backwards;
+}
+
+#about-text {
+    animation: inFromBottom 0.4s ease-out 0.25s;
+    animation-fill-mode: backwards;
 }
 
 #about-text, .project-text, .thumbnail-img {
     max-width: 100%;
+
+}
+
+.thumbnail-img img {
+    border-radius: 6px;
 }
 
 .project-card {
@@ -77,6 +94,11 @@ a:hover {
     padding: 24px;
     align-items: center;
     max-width: 825x;
+    border-radius: 10px;
+    transition: .4s;
+
+    animation: inFromBottom 0.75s ease-out 0.25s;
+    animation-fill-mode: backwards;
 }
 
 .project-card h3 {
@@ -85,6 +107,19 @@ a:hover {
 
 .project-card:hover {
     background-color: rgba(255,255,255,0.05);
+    transform: translateY(-.4rem);
+}
+
+@keyframes inFromBottom {
+    0% {
+      opacity: 0;
+      transform: translateY(2rem);
+    }
+    
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
 }
 
 @media screen and (max-width: 700px) {
