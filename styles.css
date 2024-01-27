@@ -16,7 +16,7 @@ h1, h2, h3, p {
 
 a {
     color: #EB6447;
-    /* font-weight: bold; */
+    font-weight: bold;
     text-decoration: none;
     transition: .3s;
 }
@@ -34,7 +34,7 @@ a:hover {
     margin: 0px 16px;
 }
 
-#nav-links {
+#nav-links, #footer {
     display: flex;
     align-items: center;
     gap: 0px 24px;
@@ -107,8 +107,21 @@ a:hover {
 
 .project-card:hover {
     background-color: rgba(255,255,255,0.05);
-    transform: translateY(-.4rem);
+    transform: translateY(-.3rem);
 }
+
+#footer{
+    justify-content: center;
+    padding: 16px;
+    margin:  16px;
+    border-top: 1px solid #F1E9D9;
+}
+
+#footer a:hover {
+    filter: brightness(140%);
+    transition:.25s;
+}
+
 
 @keyframes inFromBottom {
     0% {
