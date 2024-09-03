@@ -3,7 +3,7 @@
 body {
     background-color: #191919;
     font-family: 'Montserrat';
-    line-height: 140%;
+    line-height: 150%;
     max-width: 900px;
     margin: 0 auto;
 
@@ -73,13 +73,14 @@ a:hover {
     animation-fill-mode: backwards;
 }
 
-#about-text {
+#about-text, .ease-in {
     animation: inFromBottom 0.4s ease-out 0.25s;
     animation-fill-mode: backwards;
 }
 
 #about-text, .project-text, .thumbnail-img {
     max-width: 100%;
+    font-weight: normal;
 
 }
 
@@ -114,6 +115,8 @@ a:hover {
 .project-card:hover .button {
     background: #EB6447;
     color: #F1E9D9;
+    transition: all .4s ease;
+    -webkit-transition: all .4s ease;
 }
 
 .project-card:hover .button {
@@ -126,6 +129,7 @@ a:hover {
     border-radius: 5px;
     width: fit-content;
     display: inline-block;
+    font-weight: bold;
 }
 
 #footer{
@@ -162,6 +166,21 @@ a:hover {
 
 .text-center {
     text-align: center;
+}
+
+#assurant-img {
+display: block;
+margin: auto;
+margin-top: 40px;
+}
+
+.subcaption {
+    font-size: smaller;
+    opacity: 85%;
+    margin: auto;
+    text-align: center;
+    width: 70%;
+    margin-top: 8px;;
 }
 
 
