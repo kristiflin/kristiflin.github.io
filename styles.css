@@ -150,7 +150,6 @@ a:hover {
     flex-wrap: wrap;
     gap: 16px;
     justify-content: center;
-    max-width: 725px;
     margin:auto;
 }
 
@@ -158,10 +157,13 @@ a:hover {
     margin: 0px;
 }
 
-#project-paragraph {
-    margin: 0 auto;
+.project-paragraph {
     padding: 36px 24px;
+}
+
+.project-body {
     max-width: 725px;
+    margin: 0 auto;
 }
 
 .text-center {
@@ -169,9 +171,10 @@ a:hover {
 }
 
 #assurant-img {
-display: block;
-margin: auto;
-margin-top: 40px;
+    display: block;
+    margin: auto;
+    margin-top: 40px;
+    width: 95%;
 }
 
 .subcaption {
@@ -179,8 +182,8 @@ margin-top: 40px;
     opacity: 85%;
     margin: auto;
     text-align: center;
-    width: 70%;
-    margin-top: 8px;;
+    width: 80%;
+    margin-top: 8px;
 }
 
 
